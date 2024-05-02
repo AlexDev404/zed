@@ -37,13 +37,13 @@ jobs:
         with:
           save-if: ${{ github.ref == 'refs/heads/main' }}
 
-      - name: Update
+      - name: Update Rust
         run: |
             rustup update
             rustup target add wasm32-wasi
 
       - name: Build Zed
-        run: cargo run --release
+        run: cargo build --release
 
       - name: Test Zed
         run: cargo test --workspace
