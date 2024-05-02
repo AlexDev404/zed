@@ -46,15 +46,18 @@ jobs:
             rustup target add wasm32-wasi
 
       - name: Build Zed
-        run: cargo build -p zed
+        run: cargo run --release
+
+      - name: Test Zed
+        run: cargo test --workspace
 
       - name: Upload Windows Build Artifact
         uses: actions/upload-artifact@v3.1.0
         with:
           # Artifact name
-          name: build_win-latest.tar.gz
+          name: target
           # A file, directory or wildcard pattern that describes what to upload
-          path: build_win-latest.tar.gz
+          path: target
           if-no-files-found: warn
           # Duration after which artifact will expire in days. 0 means using default retention.
-          retention-days: 31
+          retention-days: 1
